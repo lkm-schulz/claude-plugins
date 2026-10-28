@@ -1,0 +1,7 @@
+{
+  "name": "lkm-schulz-plugins",
+  "owner": { "name": "lkm-schulz" },
+  "plugins": [
+    { "name": "codex-style", "source": "./plugins/codex-style" }
+  ]
+}

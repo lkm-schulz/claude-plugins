@@ -1,0 +1,16 @@
+{
+  "name": "codex-style",
+  "version": "0.8.0",
+  "description": "Claude Code's transcript in the style of Codex",
+  "license": "MIT",
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "replyStyle": {
+      "type": "string",
+      "title": "Reply style",
+      "description": "bullet: a • before each reply, as in Codex; bar: a muted bar down each reply's left edge",
+      "options": ["bullet", "bar"],
+      "default": "bullet"
+    }
+  }
+}
