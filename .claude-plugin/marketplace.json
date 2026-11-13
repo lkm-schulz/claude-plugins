@@ -1,7 +1,16 @@
 {
   "name": "lkm-schulz-plugins",
-  "owner": { "name": "lkm-schulz" },
+  "owner": {
+    "name": "lkm-schulz"
+  },
   "plugins": [
-    { "name": "codex-style", "source": "./plugins/codex-style" }
+    {
+      "name": "codex-style",
+      "source": "./plugins/codex-style"
+    },
+    {
+      "name": "typescript-lsp",
+      "source": "./plugins/typescript-lsp"
+    }
   ]
 }
