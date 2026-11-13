@@ -1,0 +1,11 @@
+#!/bin/sh
+# TypeScript 7 ships no tsserver.js, so typescript-language-server cannot run against it.
+# Use the native server of the project's TypeScript 7; otherwise fall back to typescript-language-server.
+dir=$PWD
+while [ "$dir" != / ]; do
+  if [ -x "$dir/node_modules/.bin/tsc" ] && [ ! -e "$dir/node_modules/typescript/lib/tsserver.js" ]; then
+    exec "$dir/node_modules/.bin/tsc" --lsp -stdio
+  fi
+  dir=$(dirname "$dir")
+done
+exec typescript-language-server --stdio

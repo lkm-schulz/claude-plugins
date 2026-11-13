@@ -1,0 +1,21 @@
+{
+  "name": "typescript-lsp",
+  "version": "0.1.0",
+  "description": "TypeScript language server for TypeScript 5 and the native TypeScript 7",
+  "license": "MIT",
+  "lspServers": {
+    "typescript": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/typescript-lsp",
+      "extensionToLanguage": {
+        ".ts": "typescript",
+        ".tsx": "typescriptreact",
+        ".js": "javascript",
+        ".jsx": "javascriptreact",
+        ".mts": "typescript",
+        ".cts": "typescript",
+        ".mjs": "javascript",
+        ".cjs": "javascript"
+      }
+    }
+  }
+}
