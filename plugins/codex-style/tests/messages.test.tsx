@@ -129,12 +129,12 @@ test('colours read as channels from hex and rgb spellings alone', () => {
   expect(mutedColor('ansi:redBright', false)).toBe('claude')
 })
 
-test('a summary of the model’s thinking is faint markdown after a faint ∴, with no bar', async ($, on) => {
+test('a summary of the model’s thinking is plain markdown after a ∴ in the theme’s Claude colour, with no bar', async ($, on) => {
   stubTheme(on, 'dark')
   const ui = await mount($, 'AssistantMessage', { text: 'Since `x` is USD-only, skip it.', isFirstOfReply: true, isSummary: true })
   expect(shown(await ui.drawn())).toBe('∴ Since `x` is USD-only, skip it.')
-  expect(await ui.find({ type: 'Text', text: '∴ ' })).toMatchObject({ props: { dimColor: true } })
-  expect(await ui.find({ type: 'Markdown' })).toMatchObject({ props: { dimColor: true } })
+  expect(await ui.find({ type: 'Text', text: '∴ ' })).toMatchObject({ props: { color: 'claude' } })
+  expect((await ui.find({ type: 'Markdown' }))?.props).not.toHaveProperty('dimColor')
   expect(await ui.find({ key: 'bar' })).toBeUndefined()
   await ui.unmount()
 })

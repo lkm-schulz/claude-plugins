@@ -110,14 +110,15 @@ export const formatDuration = (ms: number) => {
 }
 
 // A block of markdown after a mark in the first column, its lines wrapping
-// beside the mark: `• Fixed it.`, `∴ Found it.`.
-const markedBlock = ({ Box, Markdown, Text }: Elements, mark: string, text: string, isFaint: boolean) => (
+// beside the mark: `• Fixed it.`, `∴ Found it.`. `markColor` colours the mark
+// alone; the text keeps the engine's colour.
+const markedBlock = ({ Box, Markdown, Text }: Elements, mark: string, text: string, markColor?: string) => (
   <Box marginTop={1} width="100%">
     <Box width={textWidth(mark)} flexShrink={0}>
-      <Text dimColor={isFaint}>{mark}</Text>
+      <Text color={markColor}>{mark}</Text>
     </Box>
     <Box flexGrow={1} flexShrink={1} flexDirection="column">
-      <Markdown text={text} dimColor={isFaint} />
+      <Markdown text={text} />
     </Box>
   </Box>
 )
@@ -171,18 +172,18 @@ export const registerMessages: Register = (on, options) => {
   // edge, where the tool rows draw their bullets, the reply drawn as the
   // engine draws it beside it. The bar is a coloured space, so text copied
   // from the terminal carries no bar character. A summary (the model's
-  // thinking, as the API summarises it) is drawn faint after a `∴`, so it
-  // reads as an aside to the reply.
+  // thinking, as the API summarises it) is drawn as a reply is, after a `∴`
+  // in the theme's Claude colour.
   on('ui.render', { component: 'AssistantMessage' }, async ($, e, next) => {
     if (e.surface !== 'terminal') {
       return next(e)
     }
     const elements = $.ui.resolve(e)
     if (e.props.isSummary) {
-      return markedBlock(elements, THOUGHT_MARK, e.props.text, true)
+      return markedBlock(elements, THOUGHT_MARK, e.props.text, 'claude')
     }
     if (options.replyStyle !== 'bar') {
-      return markedBlock(elements, e.props.isFirstOfReply ? BULLET : ' '.repeat(textWidth(BULLET)), e.props.text, false)
+      return markedBlock(elements, e.props.isFirstOfReply ? BULLET : ' '.repeat(textWidth(BULLET)), e.props.text)
     }
     const { Box, Markdown } = elements
     const bar = await replyBarColor($)

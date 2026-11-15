@@ -23,7 +23,7 @@ Draws transcript in a more concise style inspired by Codex.
 - Folds: pressing `▸` shows an edit's diff, or a command's output and the files the command changed.
 - Prompts: `› fix the failing parser test` on a shaded band across the line.
 - Replies: a `•` before each reply. The `replyStyle` setting `bar` draws a muted bar down each reply's left edge instead.
-- Thinking summaries: faint, after a `∴`.
+- Thinking summaries: drawn as replies, after a `∴` in the theme's Claude colour.
 - Spinner: `✻ Working… (12s)` in place of the sampled word.
 - Turn end: `─ Worked for 42s ───` across the line.
 
